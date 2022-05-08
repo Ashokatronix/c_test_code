@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1633142220 source:c:\users\xshok\documents\cpp\control\main.c
+	<stdio.h>
+	<stdlib.h>
+
