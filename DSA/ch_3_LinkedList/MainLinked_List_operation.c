@@ -104,8 +104,23 @@ int main()
 
 struct node * create_list(struct node *start)
 {
-
-}
+    int i, n, data;
+    printf("Enter the number of nodes : ");
+    scanf("%d", &n);
+    start == NULL;
+    if(n==0)
+        return start;
+    printf("Enter the element to be inserted : ");
+    scanf("%d", &data);
+    start = addatbeg(start, data);
+    for(i = 2; i <=n; i++)
+    {
+        printf("Enter the element to be inserted : ");
+        scanf("%d", &data);
+        start = addatend(start, data);
+    }
+    return start;
+}/*End of create_list()*/
 
 void display (struct node *start)
 {
@@ -114,7 +129,7 @@ void display (struct node *start)
         printf("List is empty\n");
         return;
     }
-    struct node *p = start;
+    struct node *p = start;             // p = start; is use next line
     printf("List is :\n");
     while(p != NULL)
     {
@@ -135,7 +150,7 @@ void count (struct node *start)
         cnt++;
     }
     printf("Number of element are %d\n",cnt);
-}/*End of count*/
+}/*End of count()*/
 
 void search (struct node *start, int item)
 {
@@ -154,7 +169,7 @@ void search (struct node *start, int item)
         pos++;
     }
     printf("Item %d not found in list\n", item);
-}/*End of search*/
+}/*End of search()*/
     
 struct node * addatbeg(struct node *start, int data)
 {
@@ -164,7 +179,7 @@ struct node * addatbeg(struct node *start, int data)
     temp->link = start;
     start = temp;
     return start;
-}/*End of addatbeg*/
+}/*End of addatbeg()*/
 
 struct node * addatend(struct node *start, int data)
 {
@@ -176,7 +191,7 @@ struct node * addatend(struct node *start, int data)
     p->link = temp;
     temp->link = NULL;
     return start;
-}/*End of addatend*/
+}/*End of addatend()*/
 
 struct node * addafter(struct node *start, int data, int item)
 {
@@ -194,22 +209,120 @@ struct node * addafter(struct node *start, int data, int item)
         p = p->link;
     }
     printf("%d not present in the list\n", item);
-}/*End of addafter*/
+}/*End of addafter()*/
 
 struct node * addbefore(struct node *start, int data, int item)
 {
+    struct node *temp, *p =  start;
+    while(p->link != NULL)
+    {
+        if(p->link->info == item)
+        {
+            temp = (struct node *) malloc (sizeof(struct node));
+            temp->info = data;
+            temp->link = p->link;
+            p->link = temp;
+            return start;
+        }
+        p = p->link;
+    }
+    printf("%d not present in the list\n",item);
+}/*End of addbefore()*/
 
-}
 struct node * addatpos(struct node *start, int data, int pos)
 {
+    // if(start == NULL)
+    // {
+    //     printf("List is empty");
+    //     return;
+    // }
+    struct node *temp, *p =  start;
+    temp = (struct node *) malloc (sizeof(struct node));
+    temp->info = data;
+    if(pos == 1)
+    {
+        
+        temp->link = start;
+        start = temp;
+        return start;
+    }
+    if(pos >= 2)            //handle mid position and end position
+    {
+        int index = 2;
+        while(p->link != NULL)
+        {
+            if(index == pos)
+            {
+                temp->link = p->link;
+                p->link = temp;
+                return start;
+            }
+        p = p->link;
+        }
+        printf("There are less than %d elements\n", pos);
+    }
 
-}
+    /* Alternet code for pos >= 2
+    **********
+    p = start;
+    for(int i = 1; i< pos-1 && p != NULL; i++)
+        p = p->link;
+    if(p==NULL)
+        printf("There are less than %d elements\n", pos);
+    else
+    {
+        temp->link = p->link;
+        p->link = temp;
+    }
+    return start;
+    **********
+    */
+}/*End of addatpos()*/
+
 struct node * del(struct node *start, int data)
 {
+    struct node *tmp, *p;
+    if(start == NULL)
+    {
+        printf("List is empty\n");
+        return start;
+    }
+    if(start->info == data) /*Deletion of first node*/
+    {
+        tmp = start;
+        start = start->link;
+        free(tmp);
+        return start;
+    }
+    p = start;              /*Deletion in between or at the  end*/
+    while(p->link != NULL)
+    {
+        if(p->link->info == data)
+        {
+            tmp = p->link;
+            p->link = tmp->link;
+            free(tmp);
+            return start;
+        }
+        p = p->link;
+    }
+    printf("Element %d not found\n", data);
+    return start;
+}/*End of del()*/
 
-}
 struct node * reverse(struct node *start)
 {
-
-}
+    struct node *prev, *ptr, *next;
+    prev = NULL;
+    ptr = start;
+    while(ptr != NULL)
+    {
+        next = ptr->link;
+        ptr->link = prev;
+        prev = ptr;
+        ptr = next;
+    }
+    start = prev;
+    return start;
+}/*End of reverse()*/
 
