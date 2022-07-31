@@ -10,7 +10,7 @@ int isEmpty();
 int isFull();
 void display();
 
-main()
+int main()
 {
     int choice, item;
     while(1)
@@ -21,7 +21,7 @@ main()
         printf("4. Display all stack elements\n");
         printf("5. Quit\n");
         printf("Enter your choice : ");
-        scanf("%d",choice);
+        scanf("%d",&choice);
         switch (choice)
         {
             case 1:
@@ -54,7 +54,7 @@ void push(int item)
         printf("Stack Overflow\n");
         return;
     }
-    top+=1;
+    top++;
     stack_arr[top] = item;
 }/* End of push() */
 
@@ -67,7 +67,7 @@ int pop()
         exit(1);
     }
     item = stack_arr[top];
-    top-=1;
+    top--;
     return item;
 }/* End of pop() */
 
