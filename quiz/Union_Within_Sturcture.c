@@ -39,5 +39,5 @@ int main()
     printf("Normal_param.hvdisconnect.word : %d\n", Normal_param.hv_disconnect.word);
     }
     printf("Normal_param.hvdisconnect.word : %d\n", Normal_param.hv_disconnect.word);
-    printf("Normal_param.hvdisconnect.word.bits : %d\n", Normal_param.hv_disconnect.word.bits);
+    // printf("Normal_param.hvdisconnect.word.bits : %d\n", Normal_param.hv_disconnect.word.bits);
 }
